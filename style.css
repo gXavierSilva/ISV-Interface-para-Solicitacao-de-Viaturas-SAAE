@@ -181,7 +181,7 @@ body{
     flex-direction: row;
 }
 
-.rodape button{
+.rodape button, #sendButton{
     border: none;
     text-align: center;
     text-decoration: none;
@@ -191,7 +191,7 @@ body{
     margin: 1rem;
 }
 
-.rodape button:hover{
+.rodape button:hover, #sendButton:hover{
     transition: ease-in-out 0.2s;
     transform: scale(1.05);
     cursor: pointer;
@@ -215,4 +215,15 @@ body{
 .rodape #cancel:hover{
     background-color: rgb(218, 0, 0);
     color: #FFF;
+}
+
+#sendButton{
+    display: none;
+    color: #000;
+    background-color: #fff;
+}
+
+#sendButton:hover{
+    color: #fff;
+    background-color: #03c52d;
 }

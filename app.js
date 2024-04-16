@@ -88,14 +88,16 @@ function searchDriver(value){
 function addSolicitation(){
     const addButton = document.getElementById("add");
     addButton.parentNode.removeChild(addButton);
+    const sendSolicitations = document.getElementById("sendButton");
+    sendSolicitations.style.display = "none";
     
     const sendButton = document.createElement("button");
     sendButton.id = "send";
     const saveIcon = document.createElement("i");
-    saveIcon.classList.add("fa-solid","fa-circle-check");
+    saveIcon.classList.add("fa-solid","fa-floppy-disk");
     sendButton.appendChild(saveIcon);
     sendButton.onclick = function(){
-        sendData();
+        saveSolicitation();
     }
     const cancelButton = document.createElement("button");
     cancelButton.id = "cancel";
@@ -179,14 +181,13 @@ function addSolicitation(){
     container.append(itemContent);
 }
 
-function sendData(){
+function saveSolicitation(){
     const reason = document.getElementById("motivo");
     const vehicle = document.getElementById("viatura");
     const driver = document.getElementById("motorista");
     const observation = document.getElementById("observacao");
 
     solicitations.push([reason.value,vehicle.value,driver.value,observation.value]);
-    console.log(solicitations);
 
     const container = document.querySelector(".header");
     const actualItem = document.querySelector(".itemContent");
@@ -206,6 +207,7 @@ function sendData(){
     cancelButton.parentNode.removeChild(cancelButton);
 
     showSavedSolicitations(vehicle.value);
+    checkItensFieldContent(solicitations.length);
 }
 
 function cancelSolicitation(){
@@ -263,5 +265,20 @@ function deleteSolicitation(id){
         }
     }
     var item = document.getElementById(id);
-    item.parentNode.removeChild(item); 
+    item.parentNode.removeChild(item);
+    checkItensFieldContent(solicitations.length);
+}
+
+function checkItensFieldContent(len){
+    const sendButton = document.getElementById("sendButton");
+    if(len>0){
+        sendButton.style.display = "flex";
+    }else{
+        sendButton.style.display = "none";
+    }
+}
+
+function sendData(){
+    console.log(solicitations.length);
+
 }
