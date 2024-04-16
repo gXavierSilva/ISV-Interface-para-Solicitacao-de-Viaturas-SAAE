@@ -117,9 +117,64 @@ body{
     background-color: rgb(220, 220, 220);
 }
 
+.saved{
+    width: 100%;
+    max-height: 350px;
+    align-items: baseline;
+    text-transform: uppercase;
+    overflow-y: auto;
+}
+
+.saved::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.saved::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.saved::-webkit-scrollbar-thumb {
+    background: #039ec583;
+}
+
+.saved::-webkit-scrollbar-thumb:hover {
+    background: #039ec5;
+}
+
 .savedItem{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.savedItem button{
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 1rem 0 1rem 1rem;
+    width: 2rem;
+    height: 2rem;
+    color: #8686866c;
+    background-color: #fff;
+}
+
+.savedItem button:hover{
+    transition: ease-in-out 0.1s;
+    transform: scale(1.2);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: #000;
+    background-color: #c7c7c76c;
+}
+
+.savedItem p{
+    border-left: 1px solid black;
+    margin: 0;
+    padding: 0 1rem;
+    font-size: 0.8rem;
 }
 
 .rodape{

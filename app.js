@@ -113,6 +113,9 @@ function addSolicitation(){
     var itemContent = document.createElement("div");
     itemContent.classList.add("box", "itemContent");
     
+    const savedSolicitations = document.querySelector(".saved");
+    savedSolicitations.style.display = "none";
+    
     const reasonInputIcon = document.createElement("i");
     reasonInputIcon.classList.add('fa-solid','fa-bookmark');
     const reasonInput = document.createElement("input");
@@ -202,7 +205,7 @@ function sendData(){
     sendButton.parentNode.removeChild(sendButton);
     cancelButton.parentNode.removeChild(cancelButton);
 
-    showSavedSolicitations();
+    showSavedSolicitations(vehicle.value);
 }
 
 function cancelSolicitation(){
@@ -224,32 +227,41 @@ function cancelSolicitation(){
     cancelButton.parentNode.removeChild(cancelButton);
 }
 
-function showSavedSolicitations(){
+function showSavedSolicitations(vehicle){
     const savedField = document.querySelector(".saved");
+    savedField.style.display = "flex";
     const savedItem = document.createElement("div");
+    savedItem.id = vehicle;
     savedItem.classList.add("savedItem");
 
-    const svReason = document.createElement("p");
-    const svVehicle = document.createElement("p");
-    const svDriver = document.createElement("p");
-    const svObservation = document.createElement("p");
+    const deleteSIIcon = document.createElement("i");
+    deleteSIIcon.classList.add("fa-solid","fa-xmark");
     const deleteSI = document.createElement("button");
+    deleteSI.id = vehicle;
+    deleteSI.appendChild(deleteSIIcon);
+
+    const sIVehicle = document.createElement("p");
+    const sIDriver = document.createElement("p");
     for(var i=0;i<solicitations.length;i++){
-        const motivo = solicitations[i][0];
         const viatura = solicitations[i][1];
         const motorista = solicitations[i][2];
-        const obs = solicitations[i][3];
         
-        svReason.textContent = motivo; 
-        svVehicle.textContent = viatura; 
-        svDriver.textContent = motorista; 
-        svObservation.textContent = obs;
-        deleteSI.textContent = "-";
+        sIVehicle.textContent = viatura; 
+        sIDriver.textContent = motorista;
         deleteSI.onclick = function(){
-            console.log(`Motivo: ${motivo}. Viatura: ${viatura}. Motorista: ${motorista}. Observação: ${obs}.`)
+            deleteSolicitation(deleteSI.id);
         };
-
     }
-    savedItem.append(svReason,svVehicle,svDriver,svObservation,deleteSI);
+    savedItem.append(deleteSI,sIVehicle,sIDriver);
     savedField.append(savedItem);
+}
+
+function deleteSolicitation(id){    
+    for(var i=0;i<solicitations.length;i++){
+        if(solicitations[i][1] == id){
+            solicitations.splice(i,1);
+        }
+    }
+    var item = document.getElementById(id);
+    item.parentNode.removeChild(item); 
 }
